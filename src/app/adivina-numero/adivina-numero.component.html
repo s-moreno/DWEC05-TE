@@ -1,0 +1,62 @@
+<div class="container">
+    <h1 class="display-4">Adivina el Número <small class="badge bg-secondary">DWEC05</small>
+    </h1>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h2>Configuración del Juego </h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" [(ngModel)]="this.nombreUsuario" name="nombre" id="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" [(ngModel)]="this.apellidoUsuario" name="apellido" id="apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rango" class="form-label">Rango de números a generar:</label>
+                        <input type="number" class="form-control" [(ngModel)]="this.rangoNum" name="rango" id="rango" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="intentos" class="form-label">Número de intentos:</label>
+                        <input type="number" class="form-control" [(ngModel)]="this.intentos" name="intentos" id="intentos" min="1">
+                    </div>
+                    <button (click)="getDatos()" type="submit" class="btn btn-primary">Recoger Datos</button>
+                </form>
+            </div>
+            <div class="col-sm">
+                <div *ngIf="formValido()">
+                    <h2>¡Ongi Etorri {{this.conf.nombreUsuario}} {{this.conf.apellidoUsuario}}!</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="comprobarNumero" class="form-lable">Introduce el número a adivinar:</label>
+                            <input type="number" class="form-control" [(ngModel)]="this.numeroUsuario" name="comprobarNumero" id="comprobarNumero">
+                        </div>
+                        <div class="mb-3">
+                            <p class="alert" [ngClass]="alerta">Intentos Restantes: {{this.intentosRestantes}}</p>
+                        </div>
+                        <div class="mb-3">
+                            <p class="text-center" [innerHTML]="respuesta">/p>
+                        </div>
+                        <div class="mb-3">
+                            <button [disabled]="disabled" (click)="comprobarNumero()" type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                    <div class="mb-3" *ngIf="this.noAdivinado == true">
+                        <hr>
+                        <div class="alert alert-info">
+                            <p>Se han acabado los intentos. El número a adivinar era el <strong>{{this.conf.numeroAleatorio}}</strong>.</p>
+                            <p>Tus números han sido:</p>
+                            <ul>
+                                <li *ngFor="let numero of this.numerosIntentados">{{numero}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
