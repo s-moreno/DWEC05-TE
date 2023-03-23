@@ -46,6 +46,7 @@ export class AdivinaNumeroComponent {
     this.numerosIntentados = [];
     this.noAdivinado = false;
     this.disabled = false;
+    this.colorAlerta();
     console.log(this.conf);
   }
 
@@ -62,11 +63,11 @@ export class AdivinaNumeroComponent {
         this.numerosIntentados.push(this.numeroUsuario);
         console.log(this.numerosIntentados);
         if (this.conf.numeroAleatorio == this.numeroUsuario) {
-          this.respuesta = "¿Has Adivinado?: <mark><strong>SÍ</strong><mark>";
+          this.respuesta = "¿Has Adivinado?: <strong>SÍ</strong>";
           this.disabled = true;
         }
         else {
-          this.respuesta = "¿Has Adivinado?: <mark><strong>NO</strong><mark>";
+          this.respuesta = "¿Has Adivinado?: <strong>NO</strong>";
         }
         this.intentosRestantes--;
         this.colorAlerta();
